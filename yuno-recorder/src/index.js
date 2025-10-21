@@ -7,7 +7,7 @@ if (require('electron-squirrel-startup')) {
 }
 
 const createWindow = () => {
-  // Create the browser window.
+  // Cria a janela do navegador
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -21,7 +21,18 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   mainWindow.webContents.openDevTools();
+  mainWindow.webContents.session.setPermissionRequestHandler((webContents, permission, callback) => {
+  if (permission === 'media') {
+      callback(true); // ✅ permite captura de mídia
+    } else {
+      callback(false);
+    }
+  });
 };
+
+// Permitir captura de áudio do sistema no Chromium interno
+app.commandLine.appendSwitch('enable-features', 'WebRTCPipeWireCapturer');
+app.commandLine.appendSwitch('enable-webrtc-pipewire-capturer');
 
 // Envia as fontes de vídeo para o renderer
 ipcMain.handle('desktop:getSources', async () => {
@@ -35,7 +46,8 @@ ipcMain.handle('dialog:saveFile', async (event, defaultName) => {
     buttonLabel: 'Salvar vídeo',
     defaultPath: defaultName,
     filters: [
-      { name: 'Webm Video', extensions: ['webm'] }
+      { name: 'WebM Video', extensions: ['webm'] },
+      { name: 'MP4 Video', extensions: ['mp4'] }
     ]
   });
   return filePath;

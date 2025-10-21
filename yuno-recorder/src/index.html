@@ -11,17 +11,31 @@
     <script defer src="render.js"></script>
   </head>
   <body class="content">
-    <h1>⚡ Electron Screen Recorder</h1>
+    <h1>Yuno Recorder</h1>
 
     <video id="videoElement"></video>
+    
+    <button id="startBtn" class="button is-primary">Iniciar</button>
+    <button id="stopBtn" class="button is-warning">Parar</button>
 
-    <button id="startBtn" class="button is-primary">Start</button>
-    <button id="stopBtn" class="button is-warning">Stop</button>
+    <hr />
+
+    <label class="checkbox">
+      <input type="checkbox" id="includeSystemAudio" />
+      Gravar áudio do sistema
+    </label>
+
+    <br />
+
+    <label class="checkbox">
+      <input type="checkbox" id="includeMicAudio" />
+      Gravar microfone
+    </label>
 
     <hr />
 
     <button id="videoSelectBtn" class="button is-text">
-      Choose a Video Source
+      Escolha a tela
     </button>
   </body>
 </html>
