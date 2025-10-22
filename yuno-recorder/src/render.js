@@ -6,34 +6,40 @@ const videoElement = document.getElementById('videoElement');
 let mediaRecorder; 
 const recordedChunks = [];
 
-// Obtém as fontes de vídeo disponíveis
+// Obtém as telas de vídeo
 videoSelectBtn.onclick = async() => {
     const selectedSource = await window.electronAPI.selectSourceMenu();
     if(!selectedSource) return;
     await selectSource(selectedSource);
 };
 
-// Seleciona a fonte e configura o MediaRecorder
+// Seleciona a tela e configura o MediaRecorder para gravação
 async function selectSource(source) {
   videoSelectBtn.innerText = source.name;
-
-  const constraints = {
-    audio: false,
+  
+  const screenStream = await navigator.mediaDevices.getUserMedia({
     video: {
       mandatory: {
         chromeMediaSource: 'desktop',
         chromeMediaSourceId: source.id
       }
-    }
-  };
+    },
+    audio: false
+  });
 
-  const stream = await navigator.mediaDevices.getUserMedia(constraints);
+  const audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
-  videoElement.srcObject = stream;
+  //Combina os streams
+  const combinedStream = new MediaStream([
+    ...screenStream.getVideoTracks(),
+    ...audioStream.getAudioTracks()
+  ]);
+
+  videoElement.srcObject = combinedStream;
   await videoElement.play();
 
   const options = { mimeType: 'video/webm; codecs=vp9' };
-  mediaRecorder = new MediaRecorder(stream, options);
+  mediaRecorder = new MediaRecorder(combinedStream, options);
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.onstop = handleStop;
 }
@@ -44,6 +50,9 @@ startBtn.onclick = () => {
     alert('Selecione uma tela antes de gravar!');
     return;
   }
+
+  recordedChunks.length = 0; // Limpa a gravação
+
   mediaRecorder.start();
   startBtn.classList.add('is-danger');
   startBtn.innerText = 'Recording...';
