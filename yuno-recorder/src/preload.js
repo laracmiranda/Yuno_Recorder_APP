@@ -1,8 +1,8 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  getVideoSources: () => ipcRenderer.invoke('desktop:getSources'),
-  showSaveDialog: (defaultName) => ipcRenderer.invoke('dialog:saveFile', defaultName),
+  getSources: () => ipcRenderer.invoke('desktop:getSources'),
   selectSourceMenu: () => ipcRenderer.invoke('desktop:selectSourceMenu'),
-  saveFile: (filePath, data) => ipcRenderer.send('file:save', filePath, data)
+  showSaveDialog: (defaultName) => ipcRenderer.invoke('dialog:saveFile', defaultName),
+  saveFile: (path, data) => ipcRenderer.send('file:save', path, data)
 });

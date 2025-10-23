@@ -3,62 +3,95 @@ const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
 const videoElement = document.getElementById('videoElement');
 
-let mediaRecorder; 
+let mediaRecorder;
 const recordedChunks = [];
 
-// Obtém as telas de vídeo
-videoSelectBtn.onclick = async() => {
-    const selectedSource = await window.electronAPI.selectSourceMenu();
-    if(!selectedSource) return;
-    await selectSource(selectedSource);
+// Exibe as telas disponíveis
+videoSelectBtn.onclick = async () => {
+  const selectedSource = await window.electronAPI.selectSourceMenu();
+  if (!selectedSource) return;
+  await selectSource(selectedSource);
 };
 
-// Seleciona a tela e configura o MediaRecorder para gravação
+// Seleciona a tela para captura
 async function selectSource(source) {
   videoSelectBtn.innerText = source.name;
-  
-  const screenStream = await navigator.mediaDevices.getUserMedia({
-    video: {
-      mandatory: {
-        chromeMediaSource: 'desktop',
-        chromeMediaSourceId: source.id
+
+  try {
+    // Captura a tela e o áudio do sistema
+    const screenSystemStream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        mandatory: {
+          chromeMediaSource: 'desktop',
+          chromeMediaSourceId: source.id
+        }
+      },
+      video: {
+        mandatory: {
+          chromeMediaSource: 'desktop',
+          chromeMediaSourceId: source.id
+        }
       }
-    },
-    audio: false
-  });
+    });
 
-  const audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    // Captura o áudio do microfone separadamente
+    let micStream = null;
+    micStream = await new Promise((resolve) => {
+      setTimeout(async () => {
+        try {
+          const mic = await navigator.mediaDevices.getUserMedia({ audio: true });
+          resolve(mic);
+        } catch (err) {
+          console.warn('⚠️ Falha ao capturar microfone:', err);
+          resolve(null);
+        }
+      }, 500); // pequena pausa antes de pedir o microfone pra evitar conflitos do chromium
+    });
 
-  //Combina os streams
-  const combinedStream = new MediaStream([
-    ...screenStream.getVideoTracks(),
-    ...audioStream.getAudioTracks()
-  ]);
+    const audioContext = new AudioContext();
+    const destination = audioContext.createMediaStreamDestination();
 
-  videoElement.srcObject = combinedStream;
-  await videoElement.play();
+    const systemSource = audioContext.createMediaStreamSource(screenSystemStream);
+    systemSource.connect(destination);
 
-  const options = { mimeType: 'video/webm; codecs=vp9' };
-  mediaRecorder = new MediaRecorder(combinedStream, options);
-  mediaRecorder.ondataavailable = handleDataAvailable;
-  mediaRecorder.onstop = handleStop;
+    if (micStream) {
+      const micSource = audioContext.createMediaStreamSource(micStream);
+      micSource.connect(destination);
+    }
+
+    // Combina os treams 
+    const combinedStream = new MediaStream([
+      ...screenSystemStream.getVideoTracks(),
+      ...destination.stream.getAudioTracks()
+    ]);
+
+    videoElement.srcObject = combinedStream;
+    await videoElement.play();
+
+    const options = { mimeType: 'video/webm; codecs=vp9' };
+    mediaRecorder = new MediaRecorder(combinedStream, options);
+    mediaRecorder.ondataavailable = handleDataAvailable;
+    mediaRecorder.onstop = handleStop;
+
+  } catch (err) {
+    console.error('Erro ao capturar a tela:', err);
+  }
 }
 
-// Botão start
+
+// Inicia a gravação
 startBtn.onclick = () => {
   if (!mediaRecorder) {
     alert('Selecione uma tela antes de gravar!');
     return;
   }
-
   recordedChunks.length = 0; // Limpa a gravação
-
   mediaRecorder.start();
   startBtn.classList.add('is-danger');
   startBtn.innerText = 'Recording...';
 };
 
-// Botão stop
+// Para a gravação
 stopBtn.onclick = () => {
   if (mediaRecorder && mediaRecorder.state === 'recording') {
     mediaRecorder.stop();
@@ -67,12 +100,12 @@ stopBtn.onclick = () => {
   }
 };
 
-// Captura os pedaços de vídeo
+// Captura dados do stream
 function handleDataAvailable(e) {
   recordedChunks.push(e.data);
 }
 
-// Salva o arquivo
+// Salva vídeo após gravação
 async function handleStop() {
   const blob = new Blob(recordedChunks, { type: 'video/webm; codecs=vp9' });
   const arrayBuffer = await blob.arrayBuffer();
