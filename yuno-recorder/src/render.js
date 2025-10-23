@@ -2,23 +2,36 @@ const videoSelectBtn = document.getElementById('videoSelectBtn');
 const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
 const videoElement = document.getElementById('videoElement');
+const micCheckbox = document.getElementById('micCheckbox');
+const statusElement = document.getElementById('status'); // opcional, exibe mensagens de status
 
+let currentSource = null;
 let mediaRecorder;
 const recordedChunks = [];
 
-// Exibe as telas disponíveis
+// 🔹 Seleção de tela
 videoSelectBtn.onclick = async () => {
   const selectedSource = await window.electronAPI.selectSourceMenu();
   if (!selectedSource) return;
+
+  currentSource = selectedSource; // salva a tela atual
   await selectSource(selectedSource);
 };
 
-// Seleciona a tela para captura
+// 🔹 Função principal de captura
 async function selectSource(source) {
   videoSelectBtn.innerText = source.name;
 
+  const micEnabled = micCheckbox.checked;
+
   try {
-    // Captura a tela e o áudio do sistema
+    // Para o stream anterior, se existir
+    if (videoElement.srcObject) {
+      const tracks = videoElement.srcObject.getTracks();
+      tracks.forEach(t => t.stop());
+    }
+
+    // Captura a tela + áudio do sistema
     const screenSystemStream = await navigator.mediaDevices.getUserMedia({
       audio: {
         mandatory: {
@@ -34,20 +47,27 @@ async function selectSource(source) {
       }
     });
 
-    // Captura o áudio do microfone separadamente
     let micStream = null;
-    micStream = await new Promise((resolve) => {
-      setTimeout(async () => {
-        try {
-          const mic = await navigator.mediaDevices.getUserMedia({ audio: true });
-          resolve(mic);
-        } catch (err) {
-          console.warn('⚠️ Falha ao capturar microfone:', err);
-          resolve(null);
-        }
-      }, 500); // pequena pausa antes de pedir o microfone pra evitar conflitos do chromium
-    });
 
+    // Captura o microfone se marcado
+    if (micEnabled) {
+      micStream = await new Promise((resolve) => {
+        setTimeout(async () => {
+          try {
+            const mic = await navigator.mediaDevices.getUserMedia({ audio: true });
+            console.log('🎤 Microfone capturado com sucesso!');
+            resolve(mic);
+          } catch (err) {
+            console.warn('⚠️ Falha ao capturar microfone:', err);
+            resolve(null);
+          }
+        }, 500); // pausa para evitar conflitos
+      });
+    } else {
+      console.log('🎧 Microfone desativado pelo usuário.');
+    }
+
+    // Mixagem de áudio
     const audioContext = new AudioContext();
     const destination = audioContext.createMediaStreamDestination();
 
@@ -59,7 +79,7 @@ async function selectSource(source) {
       micSource.connect(destination);
     }
 
-    // Combina os treams 
+    // Combina vídeo + áudio final
     const combinedStream = new MediaStream([
       ...screenSystemStream.getVideoTracks(),
       ...destination.stream.getAudioTracks()
@@ -73,25 +93,37 @@ async function selectSource(source) {
     mediaRecorder.ondataavailable = handleDataAvailable;
     mediaRecorder.onstop = handleStop;
 
+    if (statusElement) {
+      statusElement.innerText = micEnabled
+        ? '🎤 Microfone ativado.'
+        : '🎧 Microfone desativado pelo usuário.';
+    }
+
   } catch (err) {
     console.error('Erro ao capturar a tela:', err);
+    if (statusElement) statusElement.innerText = '❌ Erro ao capturar tela.';
   }
 }
 
+// 🔹 Atualiza stream ao marcar/desmarcar a checkbox
+micCheckbox.addEventListener('change', async () => {
+  if (!currentSource) return; // só atualiza se já houver uma tela selecionada
+  await selectSource(currentSource);
+});
 
-// Inicia a gravação
+// 🔹 Inicia a gravação
 startBtn.onclick = () => {
   if (!mediaRecorder) {
     alert('Selecione uma tela antes de gravar!');
     return;
   }
-  recordedChunks.length = 0; // Limpa a gravação
+  recordedChunks.length = 0;
   mediaRecorder.start();
   startBtn.classList.add('is-danger');
   startBtn.innerText = 'Recording...';
 };
 
-// Para a gravação
+// 🔹 Para a gravação
 stopBtn.onclick = () => {
   if (mediaRecorder && mediaRecorder.state === 'recording') {
     mediaRecorder.stop();
@@ -100,12 +132,12 @@ stopBtn.onclick = () => {
   }
 };
 
-// Captura dados do stream
+// 🔹 Captura dados do stream
 function handleDataAvailable(e) {
   recordedChunks.push(e.data);
 }
 
-// Salva vídeo após gravação
+// 🔹 Salva vídeo após gravação
 async function handleStop() {
   const blob = new Blob(recordedChunks, { type: 'video/webm; codecs=vp9' });
   const arrayBuffer = await blob.arrayBuffer();
@@ -114,6 +146,5 @@ async function handleStop() {
   const filePath = await window.electronAPI.showSaveDialog(`vid-${Date.now()}.webm`);
   if (!filePath) return;
 
-  // Envia o conteúdo para o processo principal salvar
   window.electronAPI.saveFile(filePath, uint8Array);
 }
