@@ -9,7 +9,7 @@ let currentSource = null;
 let mediaRecorder;
 const recordedChunks = [];
 
-// 🔹 Seleção de tela
+// Seleciona a tela
 videoSelectBtn.onclick = async () => {
   const selectedSource = await window.electronAPI.selectSourceMenu();
   if (!selectedSource) return;
@@ -18,7 +18,7 @@ videoSelectBtn.onclick = async () => {
   await selectSource(selectedSource);
 };
 
-// 🔹 Função principal de captura
+// Função principal de captura
 async function selectSource(source) {
   videoSelectBtn.innerText = source.name;
 
@@ -79,7 +79,7 @@ async function selectSource(source) {
       micSource.connect(destination);
     }
 
-    // Combina vídeo + áudio final
+    // Combina vídeo e áudio final
     const combinedStream = new MediaStream([
       ...screenSystemStream.getVideoTracks(),
       ...destination.stream.getAudioTracks()
@@ -105,13 +105,13 @@ async function selectSource(source) {
   }
 }
 
-// 🔹 Atualiza stream ao marcar/desmarcar a checkbox
+// Atualiza stream ao marcar/desmarcar a checkbox
 micCheckbox.addEventListener('change', async () => {
   if (!currentSource) return; // só atualiza se já houver uma tela selecionada
   await selectSource(currentSource);
 });
 
-// 🔹 Inicia a gravação
+// Botão de iniciar
 startBtn.onclick = () => {
   if (!mediaRecorder) {
     alert('Selecione uma tela antes de gravar!');
@@ -120,10 +120,10 @@ startBtn.onclick = () => {
   recordedChunks.length = 0;
   mediaRecorder.start();
   startBtn.classList.add('is-danger');
-  startBtn.innerText = 'Recording...';
+  startBtn.innerText = 'Gravando...';
 };
 
-// 🔹 Para a gravação
+// Botão de parar
 stopBtn.onclick = () => {
   if (mediaRecorder && mediaRecorder.state === 'recording') {
     mediaRecorder.stop();
@@ -132,12 +132,12 @@ stopBtn.onclick = () => {
   }
 };
 
-// 🔹 Captura dados do stream
+// Captura dados do stream
 function handleDataAvailable(e) {
   recordedChunks.push(e.data);
 }
 
-// 🔹 Salva vídeo após gravação
+// Salva vídeo após gravação
 async function handleStop() {
   const blob = new Blob(recordedChunks, { type: 'video/webm; codecs=vp9' });
   const arrayBuffer = await blob.arrayBuffer();
