@@ -128,7 +128,7 @@ stopBtn.onclick = () => {
   if (mediaRecorder && mediaRecorder.state === 'recording') {
     mediaRecorder.stop();
     startBtn.classList.remove('is-danger');
-    startBtn.innerText = 'Start';
+    startBtn.innerText = 'Iniciar';
   }
 };
 
