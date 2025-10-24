@@ -12,6 +12,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    resizable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
@@ -22,8 +23,8 @@ const createWindow = () => {
     },
   });
 
+  mainWindow.setMenuBarVisibility(false); // Remove o menu
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
-  mainWindow.webContents.openDevTools();
 };
 
 app.on('web-contents-created', (_, contents) => {
