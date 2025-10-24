@@ -10,25 +10,33 @@
     <link rel="stylesheet" href="index.css" />
     <script defer src="render.js"></script>
   </head>
-  <body class="content">
-    <h1>⚡ Electron Screen Recorder</h1>
+ <body>
+  <div class="container">
+    <div class="header">
+      <h1>⚡ Yuno Recorder</h1>
+      <p>Capture sua tela junto com Yuno ✨</p>
+    </div>
 
-    <video id="videoElement" autoplay muted></video>
+    <div class="video-box">
+      <video id="videoElement" autoplay muted></video>
+    </div>
 
-    <button id="startBtn" class="button is-primary">Start</button>
-    <button id="stopBtn" class="button is-warning">Stop</button>
+    <div class="mic-toggle">
+      <input type="checkbox" id="micCheckbox" checked>
+      <label for="micCheckbox">Permitir microfone</label>
+    </div>
 
-    <hr />
+    <div class="controls">
+      <button id="videoSelectBtn">Escolha a tela</button>
+      <button id="startBtn">▶</button>
+      <button id="stopBtn">■</button>
+    </div>
+    
 
-    <label style="display: flex; align-items: center; gap: 6px; margin-bottom: 10px;">
-      <input type="checkbox" id="micCheckbox" />
-      🎤 Gravar microfone
-    </label>
-
-    <hr />
-
-    <button id="videoSelectBtn" class="button is-text">
-      Choose a Video Source
-    </button>
-  </body>
+    <div class="footer">
+      <p>Feito com 💜 por <span>Lara</span></p>
+    </div>
+  </div>
+</body>
+</html>
 </html>
