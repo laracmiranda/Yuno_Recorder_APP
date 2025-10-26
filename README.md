@@ -1,14 +1,18 @@
-# ⚡Yuno Recorder
+# <img width="30" height="30" alt="Posts linkedin (1)" src="https://github.com/user-attachments/assets/4e1d726c-201f-4e0e-94f6-61e59b422be9" /> Yuno Recorder
 
 <p align="left"> 
 
-![Node.js](https://img.shields.io/badge/Node.js-22+-purple.svg)
-![HTML](https://img.shields.io/badge/HTML-5-purple.svg)
-![CSS](https://img.shields.io/badge/Estilo-CSS-purple.svg)
-![Javascript](https://img.shields.io/badge/Javascript-ES6+-purple.svg)
-![Electron Forge](https://img.shields.io/badge/Electron-38.3-purple.svg)
+![Node.js](https://img.shields.io/badge/Node.js-22+-a855f7.svg)
+![HTML](https://img.shields.io/badge/HTML-5-a855f7.svg)
+![CSS](https://img.shields.io/badge/Estilo-CSS-a855f7.svg)
+![Javascript](https://img.shields.io/badge/Javascript-ES6+-a855f7.svg)
+![Electron Forge](https://img.shields.io/badge/Electron-38.3-a855f7.svg)
 
-Um **gravador de tela multiplataforma** desenvolvido com **Electron Forge**, que permite capturar vídeos da tela do seu computador de forma simples, rápida e intuitiva.
+Aplicativo de gravador de tela desenvolvido com **Electron Forge**, que permite capturar vídeos da tela do seu computador com áudio e microfone, de forma simples e intuitiva!
+
+## 📸 Demonstração rápida
+
+![yuno-recorder ‐ Feito com o Clipchamp](https://github.com/user-attachments/assets/8edab8e8-f0ea-4acf-8c57-48120d0c679f)
 
 ---
 
@@ -34,7 +38,7 @@ Um **gravador de tela multiplataforma** desenvolvido com **Electron Forge**, que
 
 ---
 
-## 🏗️ Estrutura do projeto
+## 📂 Estrutura do projeto
 
 ```
 yuno-recorder/
