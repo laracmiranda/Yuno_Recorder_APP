@@ -79,7 +79,7 @@ ipcMain.handle('dialog:saveFile', async (_, defaultName) => {
 
 // Salva o vídeo no disco
 ipcMain.on('file:save', (_, filePath, data) => {
-  fs.writeFile(filePath, Buffer.from(data), () => console.log('🎬 Vídeo salvo com sucesso!'));
+  fs.writeFile(filePath, Buffer.from(data), () => console.log('Video salvo com sucesso!'));
 });
 
 app.whenReady().then(createWindow);

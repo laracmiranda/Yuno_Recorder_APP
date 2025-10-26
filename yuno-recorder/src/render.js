@@ -55,7 +55,6 @@ async function selectSource(source) {
         setTimeout(async () => {
           try {
             const mic = await navigator.mediaDevices.getUserMedia({ audio: true });
-            console.log('🎤 Microfone capturado com sucesso!');
             resolve(mic);
           } catch (err) {
             console.warn('⚠️ Falha ao capturar microfone:', err);
@@ -63,10 +62,8 @@ async function selectSource(source) {
           }
         }, 500); // pausa para evitar conflitos
       });
-    } else {
-      console.log('🎧 Microfone desativado pelo usuário.');
     }
-
+    
     // Mixagem de áudio
     const audioContext = new AudioContext();
     const destination = audioContext.createMediaStreamDestination();
