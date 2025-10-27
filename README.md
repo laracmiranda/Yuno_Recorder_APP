@@ -10,6 +10,8 @@
 
 Aplicativo de gravador de tela desenvolvido com **Electron Forge**, que permite capturar vídeos da tela do seu computador com áudio e microfone, de forma simples e intuitiva!
 
+💜 - **Faça download para windows** [aqui!](https://github.com/laracmiranda/Yuno_Recorder_APP/releases/tag/v1.0.0)
+
 ## 📸 Demonstração rápida
 
 ![yuno-recorder ‐ Feito com o Clipchamp](https://github.com/user-attachments/assets/8edab8e8-f0ea-4acf-8c57-48120d0c679f)
@@ -99,8 +101,8 @@ O executável será gerado na pasta `out/`.
 1. Abra o aplicativo
 2. Clique em **“Selecionar tela”**
 3. Escolha o monitor ou janela desejada
-4. Pressione **“Gravar”**
-5. Clique em **“Parar gravação”** para salvar o arquivo
+4. Pressione **“Iniciar”**
+5. Clique em **“Parar”** para salvar o arquivo
 
 ---
 
