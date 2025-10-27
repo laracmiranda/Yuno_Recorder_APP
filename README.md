@@ -32,11 +32,11 @@ Aplicativo de gravador de tela desenvolvido com **Electron Forge**, que permite 
 
 ## ⚒️ Tecnologias utilizadas
 
-* **Electron Forge** — empacotamento e distribuição simplificada
-* **JavaScript (ES6+)** — lógica principal do app
-* **MediaDevices API** — captura de tela e áudio do sistema
-* **HTML + CSS** — interface leve e responsiva
-* **Node.js** — integração com o sistema de arquivos
+* **Electron Forge** - empacotamento e distribuição simplificada
+* **JavaScript (ES6+)** - lógica principal do app
+* **MediaDevices API** - captura de tela e áudio do sistema
+* **HTML + CSS** - interface leve e responsiva
+* **Node.js** - integração com o sistema de arquivos
 
 ---
 
@@ -56,7 +56,7 @@ yuno-recorder/
 
 ---
 
-## 📦 Instalação e execução
+## 📦 Instalação
 
 1️. Clonar o repositório
 
@@ -89,10 +89,10 @@ O executável será gerado na pasta `out/`.
 
 ## 💡 Como funciona
 
-1. O app usa a **API `desktopCapturer`** do Electron para listar as fontes de vídeo disponíveis (telas e janelas).
-2. Após selecionar uma fonte, a **MediaDevices API** (`navigator.mediaDevices.getDisplayMedia`) é usada para capturar o vídeo.
-3. O stream é gravado usando a **MediaRecorder API**.
-4. O vídeo é salvo localmente através do módulo `fs` do Node.js.
+- O app usa a **API `desktopCapturer`** do Electron para listar as fontes de vídeo disponíveis (telas e janelas).
+- Após selecionar uma fonte, a **MediaDevices API** (`navigator.mediaDevices.getDisplayMedia`) é usada para capturar o vídeo.
+- O stream é gravado usando a **MediaRecorder API**.
+- O vídeo é salvo localmente através do módulo `fs` do Node.js.
 
 ---
 
@@ -117,4 +117,4 @@ O executável será gerado na pasta `out/`.
 
 ## 📄 Licença
 
-Este projeto está sob a licença **MIT** — sinta-se livre para usar, modificar e compartilhar.
+Este projeto está sob a licença **MIT**. Sinta-se livre para usar, modificar e compartilhar.
