@@ -58,7 +58,7 @@ yuno-recorder/
 
 ## 📦 Instalação
 
-1️. Clonar o repositório
+1. Clonar o repositório
 
 ```bash
 git clone https://github.com/seu-usuario/screen-recorder.git
