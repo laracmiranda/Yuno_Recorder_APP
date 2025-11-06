@@ -58,7 +58,7 @@ ipcMain.handle('desktop:selectSourceMenu', async () => {
 
   return new Promise((resolve) => {
     const menu = Menu.buildFromTemplate(
-      sources.map((source) => ({
+      sources.filter(source => source.name !== 'Yuno Recorder').map((source) => ({
         label: source.name,
         click: () => resolve(source)
       }))
