@@ -11,7 +11,7 @@ app.commandLine.appendSwitch('use-fake-ui-for-media-stream');
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 657,
     resizable: false,
     icon: path.join(__dirname, '../assets/yuno.ico'),
     webPreferences: {
@@ -24,7 +24,7 @@ const createWindow = () => {
     },
   });
 
-  mainWindow.setMenu(null) // Remove menu
+  mainWindow.setMenu(null); // Remove menu
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 };
 
@@ -80,6 +80,11 @@ ipcMain.handle('dialog:saveFile', async (_, defaultName) => {
 // Salva o vídeo no disco
 ipcMain.on('file:save', (_, filePath, data) => {
   fs.writeFile(filePath, Buffer.from(data), () => console.log('Video salvo com sucesso!'));
+});
+
+// Abrir em navegador externo
+ipcMain.handle('yunoOpenURL', async (event, url) => {
+  require('electron').shell.openExternal(url);
 });
 
 app.whenReady().then(createWindow);
