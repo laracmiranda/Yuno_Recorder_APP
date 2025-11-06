@@ -11,7 +11,7 @@ const recordedChunks = [];
 
 // Seleciona a tela
 videoSelectBtn.onclick = async () => {
-  const selectedSource = await window.electronAPI.selectSourceMenu();
+  const selectedSource = await yunoRecorder.selectSourceMenu();
   if (!selectedSource) return;
 
   currentSource = selectedSource; // salva a tela atual
@@ -140,8 +140,12 @@ async function handleStop() {
   const arrayBuffer = await blob.arrayBuffer();
   const uint8Array = new Uint8Array(arrayBuffer);
 
-  const filePath = await window.electronAPI.showSaveDialog(`vid-${Date.now()}.webm`);
+  const filePath = await yunoRecorder.showSaveDialog(`vid-${Date.now()}.webm`);
   if (!filePath) return;
 
-  window.electronAPI.saveFile(filePath, uint8Array);
+  yunoRecorder.saveFile(filePath, uint8Array);
+}
+
+function openURL(url) {
+  yunoRecorder.openURL(url);
 }
