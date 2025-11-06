@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, dialog, Menu, desktopCapturer } = require('electron');
 const path = require('node:path');
+const sOS = require('os');
 const fs = require('fs');
 
 if (require('electron-squirrel-startup')) app.quit();
@@ -69,9 +70,10 @@ ipcMain.handle('desktop:selectSourceMenu', async () => {
 
 // Diálogo de salvar arquivo
 ipcMain.handle('dialog:saveFile', async (_, defaultName) => {
+  const sFilename = path.join(sOS.homedir(), defaultName);
   const { filePath } = await dialog.showSaveDialog({
     buttonLabel: 'Salvar vídeo',
-    defaultPath: defaultName,
+    defaultPath: sFilename,
     filters: [{ name: 'Webm Video', extensions: ['webm'] }]
   });
   return filePath;
