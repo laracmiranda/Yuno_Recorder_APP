@@ -20,11 +20,11 @@ const createWindow = () => {
       nodeIntegration: false,
       webSecurity: true,
       allowRunningInsecureContent: false,
-      media: true,
+      media: true
     },
   });
 
-  mainWindow.setMenuBarVisibility(false); // Remove o menu
+  mainWindow.setMenu(null) // Remove menu
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 };
 
