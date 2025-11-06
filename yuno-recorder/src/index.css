@@ -31,11 +31,19 @@ body {
   overflow: hidden;
 }
 
+a, a:hover, a:focus {
+  color: var(--accent-green);
+}
+
+.mt {
+  margin-top: 17px;
+}
+
 .container {
   width: 800px;
-  height: 600px;
+  height: 657px;
   background: rgba(20, 20, 30, 0.8);
-  padding: 1.5rem, 2rem;
+  padding: 1.5rem 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -72,7 +80,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1; 
+  flex: 1;
   margin: 1rem 0;
 }
 
@@ -81,15 +89,15 @@ body {
   height: 270px;
   background: #000;
   border-radius: 12px;
-  border: 1px solid rgba(168, 85, 247, 0.4); 
-  border-radius: 20px; 
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 20px;
   box-shadow: 0 0 20px rgba(168, 85, 247, 0.2), 0 0 40px rgba(34, 211, 238, 0.1);
   object-fit: cover;
 }
 
 /* Botões */
 .controls {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
