@@ -63,7 +63,7 @@ async function selectSource(source) {
         }, 500); // pausa para evitar conflitos
       });
     }
-    
+
     // Mixagem de áudio
     const audioContext = new AudioContext();
     const destination = audioContext.createMediaStreamDestination();
