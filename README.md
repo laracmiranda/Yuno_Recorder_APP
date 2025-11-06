@@ -2,11 +2,11 @@
 
 <p align="left"> 
 
-![Node.js](https://img.shields.io/badge/Node.js-22+-a855f7.svg)
+![Node.js](https://img.shields.io/badge/Node.js-25+-a855f7.svg)
 ![HTML](https://img.shields.io/badge/HTML-5-a855f7.svg)
 ![CSS](https://img.shields.io/badge/Estilo-CSS-a855f7.svg)
 ![Javascript](https://img.shields.io/badge/Javascript-ES6+-a855f7.svg)
-![Electron Forge](https://img.shields.io/badge/Electron-38.3-a855f7.svg)
+![Electron Forge](https://img.shields.io/badge/Electron-39.1-a855f7.svg)
 
 Aplicativo de gravador de tela desenvolvido com **Electron Forge**, que permite capturar vídeos da tela do seu computador com áudio e microfone, de forma simples e intuitiva!
 
