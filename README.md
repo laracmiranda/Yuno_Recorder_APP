@@ -1,5 +1,7 @@
 # <img width="30" height="30" alt="Posts linkedin (1)" src="https://github.com/user-attachments/assets/4e1d726c-201f-4e0e-94f6-61e59b422be9" /> Yuno Recorder
 
+Desenvolvedora Original: Lara Corsini
+
 ## Versão Ajustada para Linux Ubuntu
 Fiz alguns ajustes no software para funcionar corretamente no Linux Ubuntu e otimizei o código-fonte alterando alguns recursos.
 
@@ -34,7 +36,15 @@ Aplicativo de gravador de tela desenvolvido com **Electron Forge**, que permite 
 - Opção de gravar com microfone
 - Interface minimalista e intuitiva
 - Salvamento automático do arquivo gravado
-- Compatível com Windows e Linux Ubuntu
+
+---
+
+## Requerimento
+
+### Sistema Operacional (64 bits):
+
+- Linux Ubuntu 24.04 ou superior
+- Windows 10 ou superior
 
 ---
 
@@ -125,6 +135,12 @@ O executável será gerado na pasta `dist/`.
 
 ---
 
-## 📄 Licença
+## 📄 License
 
-Este projeto está sob a licença **MIT**. Sinta-se livre para usar, modificar e compartilhar.
+The Yuno Recorder is provided under:
+
+[SPDX-License-Identifier: GPL-2.0-only](https://spdx.org/licenses/GPL-2.0-only.html)
+
+Beign under the terms of the GNU General Public License version 2 only.
+
+All contributions to the Yuno Recorder are subject to this license.
