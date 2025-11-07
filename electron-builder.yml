@@ -2,6 +2,10 @@ asar: true
 afterPack: scripts/afuses.js
 files:
   - "!.git/**/*"
+  - "!config.sh"
+extraResources:
+  - "./LICENSE"
+  - "./README.md"
 win:
   artifactName: ${productName}-${version}-win.${ext}
   icon: assets/yuno.ico
