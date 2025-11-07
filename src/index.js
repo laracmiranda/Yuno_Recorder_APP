@@ -18,7 +18,7 @@ const createWindow = () => {
     width: 800,
     height: 657,
     resizable: false,
-    icon: path.join(__dirname, '../assets/yuno.ico'),
+    icon: path.join(__dirname, '../assets/yuno.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
