@@ -3,9 +3,10 @@
 Desenvolvedora Original: Lara Corsini
 
 ## Versão Ajustada para Linux Ubuntu
-Fiz alguns ajustes no software para funcionar corretamente no Linux Ubuntu e otimizei o código-fonte alterando alguns recursos.
 
 Modificado por: Murilo Gomes
+
+Fiz alguns ajustes no software para funcionar corretamente no Linux Ubuntu e otimizei o código-fonte alterando alguns recursos.
 
 <p align="left"> 
 
