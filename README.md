@@ -17,7 +17,7 @@ Aplicativo de gravador de tela desenvolvido com **Electron Forge**, que permite 
 
 💜 - **Faça download para Windows (versão oficial)** [aqui!](https://github.com/laracmiranda/Yuno_Recorder_APP/releases/tag/v1.0.0)
 
-💙 - **Faça download para Linux Ubuntu (versão modificada)** [aqui!](https://github.com/mugomes/Yuno_Recorder_APP/releases/download/v1.0.1/yuno-recorder-1.0.1-linux.zip)
+💙 - **Faça download para Linux Ubuntu (versão modificada)** aqui!
 
 
 ## 📸 Demonstração rápida
