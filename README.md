@@ -1,13 +1,5 @@
 # <img width="30" height="30" alt="Posts linkedin (1)" src="https://github.com/user-attachments/assets/4e1d726c-201f-4e0e-94f6-61e59b422be9" /> Yuno Recorder
 
-Desenvolvedora Original: Lara Corsini
-
-## Versão Ajustada para Linux Ubuntu
-
-Modificado por: Murilo Gomes
-
-Fiz alguns ajustes no software para funcionar corretamente no Linux Ubuntu e otimizei o código-fonte alterando alguns recursos.
-
 <p align="left"> 
 
 ![Node.js](https://img.shields.io/badge/Node.js-25+-a855f7.svg)
@@ -140,7 +132,7 @@ O executável será gerado na pasta `dist/`.
 
 The Yuno Recorder is provided under:
 
-[SPDX-License-Identifier: GPL-2.0-only](https://github.com/mugomes/Yuno_Recorder_APP/blob/main/LICENSE)
+[SPDX-License-Identifier: GPL-2.0-only](https://github.com/laracmiranda/Yuno_Recorder_APP/blob/main/LICENSE)
 
 Beign under the terms of the GNU General Public License version 2 only.
 
