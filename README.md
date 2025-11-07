@@ -1,5 +1,10 @@
 # <img width="30" height="30" alt="Posts linkedin (1)" src="https://github.com/user-attachments/assets/4e1d726c-201f-4e0e-94f6-61e59b422be9" /> Yuno Recorder
 
+## Versão Ajustada para Linux Ubuntu
+Fiz alguns ajustes no software para funcionar corretamente no Linux Ubuntu e otimizei o código-fonte alterando alguns recursos.
+
+Modificado por: Murilo Gomes
+
 <p align="left"> 
 
 ![Node.js](https://img.shields.io/badge/Node.js-25+-a855f7.svg)
@@ -10,7 +15,10 @@
 
 Aplicativo de gravador de tela desenvolvido com **Electron Forge**, que permite capturar vídeos da tela do seu computador com áudio e microfone, de forma simples e intuitiva!
 
-💜 - **Faça download para windows** [aqui!](https://github.com/laracmiranda/Yuno_Recorder_APP/releases/tag/v1.0.0)
+💜 - **Faça download para Windows (versão oficial)** [aqui!](https://github.com/laracmiranda/Yuno_Recorder_APP/releases/tag/v1.0.0)
+
+💙 - **Faça download para Linux Ubuntu (versão modificada)** [aqui!](https://github.com/mugomes/Yuno_Recorder_APP/releases/download/v1.0.1/yuno-recorder-1.0.1-linux.zip)
+
 
 ## 📸 Demonstração rápida
 
@@ -26,13 +34,13 @@ Aplicativo de gravador de tela desenvolvido com **Electron Forge**, que permite 
 - Opção de gravar com microfone
 - Interface minimalista e intuitiva
 - Salvamento automático do arquivo gravado
-- Compatível com Windows, macOS e Linux
+- Compatível com Windows e Linux Ubuntu
 
 ---
 
-## ⚒️ Tecnologias utilizadas
+## ⚒️ Tecnologias utilizadas/alteradas
 
-* **Electron Forge** - empacotamento e distribuição simplificada
+* **Electron Builder** - empacotamento e distribuição simplificada
 * **JavaScript (ES6+)** - lógica principal do app
 * **MediaDevices API** - captura de tela e áudio do sistema
 * **HTML + CSS** - interface leve e responsiva
@@ -49,8 +57,10 @@ yuno-recorder/
 │   ├── render.js         # Lógica da interface (renderer)
 │   ├── index.html        # Layout principal
 │   └── index.css         # Estilos da interface
+├── scripts/
+│   ├── afuses.js          # Aplica os fuses
 ├── package.json
-├── forge.config.js
+├── electron-builder.yml
 └── README.md
 ```
 
@@ -80,10 +90,10 @@ npm start
 4. Gerar build do aplicativo
 
 ```bash
-npm run make
+npm run dist --win --linux
 ```
 
-O executável será gerado na pasta `out/`.
+O executável será gerado na pasta `dist/`.
 
 ---
 
