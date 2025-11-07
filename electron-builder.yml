@@ -1,11 +1,15 @@
 asar: true
-afterPack: scripts/afuses.js
 files:
   - "!.git/**/*"
   - "!config.sh"
 extraResources:
   - "./LICENSE"
   - "./README.md"
+electronFuses:
+  runAsNode: false
+  enableCookieEncryption: true
+  enableNodeCliInspectArguments: false
+  enableNodeOptionsEnvironmentVariable: false
 win:
   artifactName: ${productName}-${version}-win.${ext}
   icon: assets/yuno.ico
