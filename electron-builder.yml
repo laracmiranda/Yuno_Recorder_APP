@@ -1,0 +1,14 @@
+asar: true
+afterPack: scripts/afuses.js
+files:
+  - "!.git/**/*"
+win:
+  artifactName: ${productName}-${version}-win.${ext}
+  icon: assets/yuno.ico
+  target:
+    - "dir"
+linux:
+  artifactName: ${productName}-${version}-linux.${ext}
+  target:
+    - "dir"
+publish: null
