@@ -139,7 +139,7 @@ O executável será gerado na pasta `dist/`.
 
 The Yuno Recorder is provided under:
 
-[SPDX-License-Identifier: GPL-2.0-only](https://spdx.org/licenses/GPL-2.0-only.html)
+[SPDX-License-Identifier: GPL-2.0-only](https://github.com/mugomes/Yuno_Recorder_APP/blob/main/LICENSE)
 
 Beign under the terms of the GNU General Public License version 2 only.
 
